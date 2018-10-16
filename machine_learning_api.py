@@ -79,11 +79,8 @@ def remove_singlechar_words(text):
 
 @app.route('/api', methods=['POST'])
 def make_prediction():
-    model_path = os.path.join(os.path.pardir,os.path.pardir,'models')
-    model_file_path = os.path.join(model_path,'svm_model.pkl')
-    tfidf_file_path = os.path.join(model_path,'svm_tfidf.pkl')
-    clf_sgd_loaded = pickle.load(open(model_file_path, 'rb'))
-    tfidf_sgd_loaded = pickle.load(open(tfidf_file_path, 'rb'))
+    clf_sgd_loaded = pickle.load(open('svm_model.pkl', 'rb'))
+    tfidf_sgd_loaded = pickle.load(open('svm_tfidf.pkl', 'rb'))
     df=pd.DataFrame(columns=['TicketDescription','Location'])    
     data = request.get_json(force=True)
     df['TicketDescription']=pd.Series(data['TicketDescription'])
