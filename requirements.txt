@@ -1,0 +1,7 @@
+flask
+pickle
+numpy
+pandas
+sklearn
+fastai==0.7.0
+torchtext==0.2.3

@@ -5,7 +5,7 @@ import numpy as np
 import json
 import pickle
 import os
-from old.fastai.text import *
+from fastai.text import *
 import nltk
 nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
