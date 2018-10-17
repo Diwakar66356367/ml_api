@@ -109,8 +109,8 @@
 	        		data : $('form').serialize(),
 	        		success : function(result){
 	        			var json_result = JSON.parse(result);
-	        			var price = json_result['0']['0'];
-	        			swal('Estimated price is '+price+' DH', '','success')
+	        			var group = json_result;
+	        			swal('Assignment Group is '+group+)
 	        		},
 	        		error : function(){
 	        			console.log("error")
