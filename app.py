@@ -13,6 +13,10 @@ import spacy
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 class Tokenizer():
     def __init__(self, lang='en'):
         self.re_br = re.compile(r'<\s*br\s*/?>', re.IGNORECASE)
