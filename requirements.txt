@@ -4,5 +4,6 @@ numpy
 pandas
 spacy
 nltk
+gunicorn==19.6.0
 
 
