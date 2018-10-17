@@ -99,10 +99,9 @@
 	        $("button#predict").click(function(e){
 	        	e.preventDefault();
 	        	/*Get for variabes*/
-	        	var mileage = $("#mileage").val(), year_model = $("#year_model").val(), mark = $("#mark").val();
-	        	var fiscal_power = $("#fiscal_power").val(), fuel_type = $("#fuel_type").val();
+	        	var ticketdescription = $("#ticketdescription").val(), location = $("#location").val();
 	        	/*create the JSON object*/
-	        	var data = {"mileage":mileage, "year_model":year_model, "mark":mark, "fiscal_power":fiscal_power, "fuel_type":fuel_type}
+	        	var data = {"ticketdescription":ticketdescription, "location":location}
 	        	/*send the ajax request*/
 	        	$.ajax({
 	        		method : "POST",
@@ -110,7 +109,7 @@
 	        		data : $('form').serialize(),
 	        		success : function(result){
 	        			var json_result = JSON.parse(result);
-	        			var price = json_result['price'];
+	        			var price = json_result['0']['0'];
 	        			swal('Estimated price is '+price+' DH', '','success')
 	        		},
 	        		error : function(){
