@@ -66,8 +66,8 @@
 	        data : $('form').serialize(),
 	        success : function(result){
 	        var json_result = JSON.parse(result);
-	        var price = json_result['0']['0'];
-	        swal('Assignment Group '+ price)
+	        var group = json_result['0']['0'];
+	        swal(group)
 	        },
 	        error : function(){
 	        	console.log("error")
