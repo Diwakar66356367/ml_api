@@ -11,7 +11,9 @@ nltk.download('wordnet')
 import re
 import spacy
 from spacy import load
-import en_core_web_sm
+import sputnik
+import spacy.about
+package = sputnik.install('spacy', spacy.about.__version__, spacy.about.__default_model__)
 
 app = Flask(__name__)
 

@@ -6,5 +6,5 @@ spacy
 nltk
 gunicorn==19.6.0
 scikit-learn==0.19.1
-en_core_web_sm
+sputnik
 
