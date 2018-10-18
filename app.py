@@ -151,8 +151,7 @@ def make_prediction():
     tfidf_fit=tfidf_sgd_loaded.transform(df['TicketDesc+Loc'])
     prediction=clf_sgd_loaded.predict(tfidf_fit)
     prediction_pd=pd.DataFrame(prediction)
-        
-        
+    print(prediction_pd.to_json())   
     return prediction_pd.to_json()
 
 if __name__ == '__main__':
