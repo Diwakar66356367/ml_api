@@ -12,6 +12,7 @@ import re
 import spacy
 from spacy import load
 import en_core_web_sm
+from sklearn.feature_extraction import stop_words
 
 app = Flask(__name__)
 
@@ -123,6 +124,12 @@ def cleanDataset(df):
         for regex in getRegexList():
             df[column] = removeString(df[column], regex)
     return df
+def remove_stopwords(text):
+    word_list=nltk.wordpunct_tokenize(text)
+    if len(word_list)==0:
+        return ''
+    text_after_nonenglish_removal=(' '.join(word for word in word_list if word not in stop_words.ENGLISH_STOP_WORDS))
+    return text_after_nonenglish_removal
 
 def remove_singlechar_words(text):
     word_sent=nltk.wordpunct_tokenize(str(text))
@@ -131,7 +138,6 @@ def remove_singlechar_words(text):
 
 @app.route('/api', methods=['POST'])
 def make_prediction():
-    print('Executed App')
     clf_sgd_loaded = pickle.load(open('svm_model.pkl', 'rb'))
     tfidf_sgd_loaded = pickle.load(open('svm_tfidf.pkl', 'rb'))
     df=pd.DataFrame(columns=['TicketDescription','Location']) 
@@ -139,19 +145,19 @@ def make_prediction():
     df['TicketDescription']=pd.Series(result['ticketdescription'])
     df['Location']=pd.Series(result['location'])
     df=cleanDataset(df)
-    #df['TicketDescription']=df['TicketDescription'].apply(lambda x: remove_singlechar_words(x))
+    df['TicketDescription']=df['TicketDescription'].apply(lambda x: remove_singlechar_words(x))
     df['TicketDescription'].str.strip()
     df['Location'].str.strip()
     df['TicketDesc+Loc']=df[['TicketDescription','Location']].apply(lambda x:' '.join(x),axis=1)
     tok_trn= get_texts(df['TicketDesc+Loc'])
     df['TicketDesc+Loc']=' '.join(tok_trn[0])
-    #df['TicketDesc+Loc']=df['TicketDesc+Loc'].apply(lambda x: lemmatize_text(x))  
+    df['TicketDesc+Loc']=df['TicketDesc+Loc'].apply(lambda x: lemmatize_text(x))
+    df['TicketDesc+Loc']=df['TicketDesc+Loc'].apply(lambda x: remove_stopwords(x))   
     
        
     tfidf_fit=tfidf_sgd_loaded.transform(df['TicketDesc+Loc'])
     prediction=clf_sgd_loaded.predict(tfidf_fit)
     prediction_pd=pd.DataFrame(prediction)
-    print(prediction_pd.to_json())   
     return prediction_pd.to_json()
 
 if __name__ == '__main__':
