@@ -135,9 +135,9 @@ def make_prediction():
     df=pd.DataFrame(columns=['TicketDescription','Location']) 
     result=request.form
     df['TicketDescription']=pd.Series(result['TicketDescription'])
-	print(df['TicketDescription'])
+    print(df['TicketDescription'])
     df['Location']=pd.Series(result['Location'])
-	print(df['Location'])
+    print(df['Location'])
     df=cleanDataset(df)
     df['TicketDescription']=df['TicketDescription'].apply(lambda x: remove_singlechar_words(x))
     df['TicketDescription'].str.strip()
