@@ -133,11 +133,9 @@ def make_prediction():
     clf_sgd_loaded = pickle.load(open('svm_model.pkl', 'rb'))
     tfidf_sgd_loaded = pickle.load(open('svm_tfidf.pkl', 'rb'))
     df=pd.DataFrame(columns=['TicketDescription','Location']) 
-    result=request.form
-    df['TicketDescription']=pd.Series(result['TicketDescription'])
-    print(df['TicketDescription'])
-    df['Location']=pd.Series(result['Location'])
-    print(df['Location'])
+    result=request.get_json()
+    df['TicketDescription']=pd.Series(result['ticketdescription'])
+    df['Location']=pd.Series(result['location'])
     df=cleanDataset(df)
     df['TicketDescription']=df['TicketDescription'].apply(lambda x: remove_singlechar_words(x))
     df['TicketDescription'].str.strip()
@@ -150,9 +148,10 @@ def make_prediction():
        
     tfidf_fit=tfidf_sgd_loaded.transform(df['TicketDesc+Loc'])
     prediction=clf_sgd_loaded.predict(tfidf_fit)
+    prediction_pd=pd.DataFrame(prediction)
         
         
-    return json.dumps({'Assignment Group':prediction})
+    return prediction_pd.to_json()
 
 if __name__ == '__main__':
     
