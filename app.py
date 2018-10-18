@@ -10,6 +10,8 @@ from nltk.stem import WordNetLemmatizer
 nltk.download('wordnet')
 import re
 import spacy
+from spacy import load
+import en_core_web_sm
 
 app = Flask(__name__)
 
