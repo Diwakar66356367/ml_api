@@ -139,13 +139,13 @@ def make_prediction():
     df['TicketDescription']=pd.Series(result['ticketdescription'])
     df['Location']=pd.Series(result['location'])
     df=cleanDataset(df)
-    df['TicketDescription']=df['TicketDescription'].apply(lambda x: remove_singlechar_words(x))
+    #df['TicketDescription']=df['TicketDescription'].apply(lambda x: remove_singlechar_words(x))
     df['TicketDescription'].str.strip()
     df['Location'].str.strip()
     df['TicketDesc+Loc']=df[['TicketDescription','Location']].apply(lambda x:' '.join(x),axis=1)
     tok_trn= get_texts(df['TicketDesc+Loc'])
     df['TicketDesc+Loc']=' '.join(tok_trn[0])
-    df['TicketDesc+Loc']=df['TicketDesc+Loc'].apply(lambda x: lemmatize_text(x))  
+    #df['TicketDesc+Loc']=df['TicketDesc+Loc'].apply(lambda x: lemmatize_text(x))  
     
        
     tfidf_fit=tfidf_sgd_loaded.transform(df['TicketDesc+Loc'])
