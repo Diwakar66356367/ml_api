@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Cars Price Predictor</title>
+	<title>Auto Routing</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -67,38 +67,11 @@
 
 
 
-	<div id="dropDownSelect1"></div>
-
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/animsition/js/animsition.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/bootstrap/js/popper.js') }}"></script>
-	<script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/select2/select2.min.js') }}"></script>
-	<script>
-		$(".selection-2").select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $('#dropDownSelect1')
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/daterangepicker/moment.min.js') }}"></script>
-	<script src="{{ url_for('static',filename='vendor/daterangepicker/daterangepicker.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/countdowntime/countdowntime.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
-	<!-- include sweetAlert plugin -->
-	<script src="{{ url_for('static',filename='js/sweetalert2.all.js') }}"></script>
 	<script type="text/javascript">
 		$(function () {
 
 	        $("button#predict").click(function(e){
 	        	e.preventDefault();
-	        	/*Get for variabes*/
 	        	var ticketdescription = $("#ticketdescription").val(), location = $("#location").val();
 	        	/*create the JSON object*/
 	        	var data = {"ticketdescription":ticketdescription, "location":location}
