@@ -129,13 +129,15 @@ def remove_singlechar_words(text):
 
 @app.route('/api', methods=['POST'])
 def make_prediction():
-    
+    print('Executed App')
     clf_sgd_loaded = pickle.load(open('svm_model.pkl', 'rb'))
     tfidf_sgd_loaded = pickle.load(open('svm_tfidf.pkl', 'rb'))
     df=pd.DataFrame(columns=['TicketDescription','Location']) 
     result=request.form
     df['TicketDescription']=pd.Series(result['TicketDescription'])
+	print(df['TicketDescription'])
     df['Location']=pd.Series(result['Location'])
+	print(df['Location'])
     df=cleanDataset(df)
     df['TicketDescription']=df['TicketDescription'].apply(lambda x: remove_singlechar_words(x))
     df['TicketDescription'].str.strip()
