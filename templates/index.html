@@ -65,6 +65,7 @@
 	        url : window.location.href + 'api',
 	        data : $('form').serialize(),
 	        success : function(result){
+			swal(result);
 	        var json_result = JSON.parse(result);
 	        var price = json_result['0'];
 	        swal('Assignment Group '+price)
