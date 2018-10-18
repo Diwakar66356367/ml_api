@@ -22,7 +22,7 @@ def home():
 class Tokenizer():
     def __init__(self, lang='en'):
         self.re_br = re.compile(r'<\s*br\s*/?>', re.IGNORECASE)
-        self.tok = spacy.load(lang)
+        self.tok = spacy.load(en_core_web_sm)
 
     def sub_br(self,x): return self.re_br.sub("\n", x)
 
