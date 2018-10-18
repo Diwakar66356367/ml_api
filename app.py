@@ -133,7 +133,7 @@ def make_prediction():
     clf_sgd_loaded = pickle.load(open('svm_model.pkl', 'rb'))
     tfidf_sgd_loaded = pickle.load(open('svm_tfidf.pkl', 'rb'))
     df=pd.DataFrame(columns=['TicketDescription','Location']) 
-    result=request.get_json()
+    result=request.form
     df['TicketDescription']=pd.Series(result['ticketdescription'])
     df['Location']=pd.Series(result['location'])
     df=cleanDataset(df)
